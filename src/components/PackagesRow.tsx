@@ -10,34 +10,11 @@ const carriers: {
   key: CarrierKey;
   label: string;
   color: string;
-  bg: string;
-  hoverBg: string;
   border: string;
 }[] = [
-  {
-    key: "jazz",
-    label: "Jazz",
-    color: "#E60028",
-    bg: "#1A0002",
-    hoverBg: "#220005",
-    border: "#E8000D40",
-  },
-  {
-    key: "zong",
-    label: "Zong",
-    color: "#00A0DC",
-    bg: "#001525",
-    hoverBg: "#001E35",
-    border: "#00A0DC40",
-  },
-  {
-    key: "ufone",
-    label: "Ufone",
-    color: "#9B1D8A",
-    bg: "#180018",
-    hoverBg: "#210021",
-    border: "#9B1D8A40",
-  },
+  { key: "jazz", label: "Jazz", color: "#E60028", border: "#E6002820" },
+  { key: "zong", label: "Zong", color: "#0072B5", border: "#0072B520" },
+  { key: "ufone", label: "Ufone", color: "#9B1D8A", border: "#9B1D8A20" },
 ];
 
 export default function PackagesRow({ lang }: Props) {
@@ -45,12 +22,12 @@ export default function PackagesRow({ lang }: Props) {
 
   return (
     <div
-      className="mx-4 mb-4 bg-brand-surface rounded-[14px] border border-brand-border p-4 relative z-10"
-      style={{ borderTop: "1px solid #ffffff08" }}
+      className="mx-4 mb-4 bg-brand-surface rounded-2xl border p-4 relative z-10 tile-shadow"
+      style={{ borderColor: "var(--color-brand-border)" }}
     >
       <div className="flex items-center gap-2 mb-3">
-        <span className="block w-[2px] h-3 bg-brand-accent rounded-sm" />
-        <p className="text-[11px] text-brand-textMuted tracking-widest font-medium">
+        <span className="block w-1.5 h-1.5 rounded-full bg-brand-accent" />
+        <p className="text-[10px] text-brand-textMuted tracking-[0.2em] font-semibold">
           {t.packages}
         </p>
       </div>
@@ -58,21 +35,13 @@ export default function PackagesRow({ lang }: Props) {
         {carriers.map((c) => (
           <button
             key={c.key}
-            className="h-11 rounded-xl text-[12px] font-semibold border flex items-center justify-center gap-2 active:scale-[0.97] cursor-pointer"
+            className="h-12 rounded-xl text-[12px] font-semibold flex items-center justify-center gap-2 active:scale-[0.97] cursor-pointer bg-white hover:bg-brand-hover transition-all"
             style={{
-              backgroundColor: c.bg,
-              borderColor: c.border,
+              border: `1px solid ${c.border}`,
               color: c.color,
-              transition: "all 0.15s ease",
             }}
-            onMouseEnter={(e) =>
-              (e.currentTarget.style.backgroundColor = c.hoverBg)
-            }
-            onMouseLeave={(e) =>
-              (e.currentTarget.style.backgroundColor = c.bg)
-            }
           >
-            <CarrierAvatar carrier={c.key} size={20} />
+            <CarrierAvatar carrier={c.key} size={22} />
             {c.label}
           </button>
         ))}
