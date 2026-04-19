@@ -7,6 +7,7 @@ import PackagesRow from "@/components/PackagesRow";
 import DarazCTA from "@/components/DarazCTA";
 import HowItWorks from "@/components/HowItWorks";
 import Footer from "@/components/Footer";
+import BackgroundFX from "@/components/BackgroundFX";
 import phones from "@/data/phones.json";
 import { strings, type Lang } from "@/i18n/strings";
 import { checkCompatibilityAI } from "@/services/gemini";
@@ -55,8 +56,9 @@ function Index() {
   };
 
   return (
-    <div className="min-h-screen bg-brand-bg">
-      <div className="mx-auto max-w-[480px] bg-brand-bg min-h-screen flex flex-col">
+    <div className="min-h-screen bg-brand-bg relative">
+      <BackgroundFX />
+      <div className="mx-auto max-w-[480px] min-h-screen flex flex-col relative z-10">
         <Navbar lang={lang} onToggleLang={() => setLang(lang === "en" ? "ur" : "en")} />
         <HeroSearch lang={lang} onSearch={handleSearch} />
 

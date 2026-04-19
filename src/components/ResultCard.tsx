@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import type { Lang } from "@/i18n/strings";
 import { strings } from "@/i18n/strings";
+import CarrierAvatar, { type CarrierKey } from "./CarrierAvatar";
 
 export type Status = "YES" | "PARTIAL" | "NO";
 
@@ -21,11 +22,11 @@ interface Props {
   phone: PhoneResult;
 }
 
-const carriers = [
-  { key: "jazz", label: "Jazz", icon: "/assets/jazz.png" },
-  { key: "zong", label: "Zong", icon: "/assets/zong.png" },
-  { key: "ufone", label: "Ufone", icon: "/assets/ufone.png" },
-] as const;
+const carriers: { key: CarrierKey; label: string }[] = [
+  { key: "jazz", label: "Jazz" },
+  { key: "zong", label: "Zong" },
+  { key: "ufone", label: "Ufone" },
+];
 
 export default function ResultCard({ lang, phone }: Props) {
   const t = strings[lang];
@@ -48,21 +49,42 @@ export default function ResultCard({ lang, phone }: Props) {
         : { text: t.partial, cls: "bg-status-partialBg text-status-partial border border-status-partial/30" };
 
   const statusPill = (s: Status) => {
-    if (s === "YES") return { text: t.supported, cls: "text-status-yes bg-status-yesBg" };
-    if (s === "PARTIAL") return { text: t.partialPill, cls: "text-status-partial bg-status-partialBg" };
-    return { text: t.notSupported, cls: "text-status-no bg-status-noBg" };
+    if (s === "YES")
+      return {
+        text: t.supported,
+        cls: "text-status-yes bg-status-yesBg",
+        glow: "0 0 8px rgba(0,200,83,0.25)",
+      };
+    if (s === "PARTIAL")
+      return {
+        text: t.partialPill,
+        cls: "text-status-partial bg-status-partialBg",
+        glow: "0 0 8px rgba(255,183,0,0.25)",
+      };
+    return {
+      text: t.notSupported,
+      cls: "text-status-no bg-status-noBg",
+      glow: "0 0 8px rgba(255,68,68,0.25)",
+    };
   };
 
   return (
     <div
-      className={`mx-4 mb-4 bg-brand-surface rounded-[14px] border border-brand-border overflow-hidden transition-all duration-300 ${
-        shown ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
-      }`}
+      className={`mx-4 mb-4 bg-brand-surface rounded-[14px] border border-brand-border overflow-hidden relative z-10`}
+      style={{
+        borderTop: "1px solid #ffffff08",
+        opacity: shown ? 1 : 0,
+        transform: shown ? "translateY(0)" : "translateY(12px)",
+        transition: "opacity 300ms ease, transform 300ms ease",
+      }}
     >
       <div className="px-4 py-3 border-b border-brand-border flex justify-between items-center">
-        <div>
-          <p className="text-[10px] text-brand-textMuted tracking-widest">{t.resultFor}</p>
-          <p className="text-[14px] font-semibold text-brand-textPrimary">{phone.name}</p>
+        <div className="flex items-center gap-2">
+          <span className="block w-[2px] h-3 bg-brand-accent rounded-sm" />
+          <div>
+            <p className="text-[10px] text-brand-textMuted tracking-widest">{t.resultFor}</p>
+            <p className="text-[14px] font-semibold text-brand-textPrimary">{phone.name}</p>
+          </div>
         </div>
         <span className={`text-[11px] font-semibold rounded-full px-3 py-1 ${overallPill.cls}`}>
           {overallPill.text}
@@ -89,22 +111,21 @@ export default function ResultCard({ lang, phone }: Props) {
             const bands = phone[`${c.key}Bands` as "jazzBands"] as string;
             const pill = statusPill(s);
             return (
-              <tr key={c.key} className="border-t border-brand-border">
+              <tr
+                key={c.key}
+                className="border-t border-brand-border carrier-row"
+              >
                 <td className="px-4 py-3">
                   <div className="flex items-center">
-                    <img
-                      src={c.icon}
-                      alt={c.label}
-                      className="w-[26px] h-[26px] rounded-[7px] object-contain bg-brand-hover"
-                      onError={(e) => {
-                        (e.currentTarget as HTMLImageElement).style.visibility = "hidden";
-                      }}
-                    />
+                    <CarrierAvatar carrier={c.key} size={28} />
                     <span className="ml-2 text-[13px] font-medium text-[#C8DCF0]">{c.label}</span>
                   </div>
                 </td>
                 <td className="text-center py-3">
-                  <span className={`inline-flex items-center gap-1 text-[12px] font-semibold rounded-full px-2.5 py-0.5 ${pill.cls}`}>
+                  <span
+                    className={`inline-flex items-center gap-1 text-[12px] font-semibold rounded-full px-2.5 py-0.5 ${pill.cls}`}
+                    style={{ boxShadow: pill.glow }}
+                  >
                     {pill.text}
                   </span>
                 </td>

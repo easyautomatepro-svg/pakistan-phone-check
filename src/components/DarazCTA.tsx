@@ -4,10 +4,16 @@ import { strings } from "@/i18n/strings";
 export default function DarazCTA({ lang }: { lang: Lang }) {
   const t = strings[lang];
   return (
-    <div className="mx-4 mb-4 bg-brand-surface rounded-[14px] border border-brand-border p-4">
-      <p className="text-[11px] text-brand-textMuted tracking-widest font-medium">
-        {t.upgrade}
-      </p>
+    <div
+      className="mx-4 mb-4 bg-brand-surface rounded-[14px] border border-brand-border p-4 relative z-10"
+      style={{ borderTop: "1px solid #ffffff08" }}
+    >
+      <div className="flex items-center gap-2">
+        <span className="block w-[2px] h-3 bg-brand-accent rounded-sm" />
+        <p className="text-[11px] text-brand-textMuted tracking-widest font-medium">
+          {t.upgrade}
+        </p>
+      </div>
       <p className="text-[12px] text-brand-textMuted mb-3">{t.upgradeSub}</p>
       <a
         href="https://www.daraz.pk/smartphones/?spm=a2a0e.home.cate_1.1"
