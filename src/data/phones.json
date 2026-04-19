@@ -1,0 +1,62 @@
+[
+  {
+    "name": "Samsung Galaxy S25 Ultra",
+    "brand": "Samsung",
+    "variant": "SM-S938B",
+    "confidence": "HIGH",
+    "jazz": "YES",
+    "zong": "YES",
+    "ufone": "YES",
+    "jazzBands": "n28, n41",
+    "zongBands": "n28, n78",
+    "ufoneBands": "n41"
+  },
+  {
+    "name": "iPhone 16 Pro",
+    "brand": "Apple",
+    "variant": "A3293",
+    "confidence": "HIGH",
+    "jazz": "YES",
+    "zong": "YES",
+    "ufone": "YES",
+    "jazzBands": "n28, n38",
+    "zongBands": "n28, n78",
+    "ufoneBands": "n38"
+  },
+  {
+    "name": "Realme 13 Pro+",
+    "brand": "Realme",
+    "variant": "Global",
+    "confidence": "MEDIUM",
+    "jazz": "YES",
+    "zong": "PARTIAL",
+    "ufone": "YES",
+    "jazzBands": "n28, n41",
+    "zongBands": "n28",
+    "ufoneBands": "n41"
+  },
+  {
+    "name": "Xiaomi Redmi Note 14",
+    "brand": "Xiaomi",
+    "variant": "Global",
+    "confidence": "MEDIUM",
+    "jazz": "PARTIAL",
+    "zong": "PARTIAL",
+    "ufone": "NO",
+    "jazzBands": "n28",
+    "zongBands": "n28",
+    "ufoneBands": "—"
+  },
+  {
+    "name": "OnePlus 13",
+    "brand": "OnePlus",
+    "variant": "PJX110",
+    "confidence": "HIGH",
+    "jazz": "YES",
+    "zong": "YES",
+    "ufone": "YES",
+    "jazzBands": "n28, n41",
+    "zongBands": "n28, n78",
+    "ufoneBands": "n41"
+  }
+]
