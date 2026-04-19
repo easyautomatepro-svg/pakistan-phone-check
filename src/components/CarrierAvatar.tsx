@@ -50,7 +50,8 @@ export default function CarrierAvatar({ carrier, size = 28 }: Props) {
           height: size,
           borderRadius: radius,
           objectFit: "contain",
-          background: "var(--color-brand-hover)",
+          background: "#FFFFFF",
+          border: "1px solid var(--color-brand-border)",
         }}
       />
     );

@@ -38,141 +38,164 @@ export default function HeroSearch({ lang, onSearch }: Props) {
   const phoneCount = (phones as Phone[]).length;
 
   return (
-    <section className="relative z-10 px-4 pt-7 pb-6">
-      {/* Floating phone signal icon */}
+    <section className="relative z-10 px-4 pt-5 pb-4">
+      {/* Deep green hero card — Easypaisa inspired */}
       <div
-        aria-hidden
-        className="absolute"
-        style={{
-          right: 16,
-          top: 20,
-          opacity: 0.5,
-          animation: "pulse-glow 3s ease-in-out infinite",
-        }}
+        className="hero-card relative rounded-[22px] p-5 overflow-hidden"
+        dir={isRtl ? "rtl" : "ltr"}
       >
-        <svg width="40" height="60" viewBox="0 0 40 60" fill="none">
-          <rect
-            x="6"
-            y="10"
-            width="22"
-            height="42"
-            rx="4"
-            stroke="#00C853"
-            strokeWidth="1.5"
-            fill="none"
-            opacity="0.6"
-          />
-          <path
-            d="M30 18 Q34 14 38 18"
-            stroke="#00C853"
-            strokeWidth="1.2"
-            fill="none"
-            strokeLinecap="round"
-            opacity="0.4"
-          />
-          <path
-            d="M30 14 Q35 9 40 14"
-            stroke="#00C853"
-            strokeWidth="1.2"
-            fill="none"
-            strokeLinecap="round"
-            opacity="0.6"
-          />
-          <path
-            d="M30 10 Q36 4 42 10"
-            stroke="#00C853"
-            strokeWidth="1.2"
-            fill="none"
-            strokeLinecap="round"
-            opacity="0.8"
-          />
-        </svg>
-      </div>
-
-      <div dir={isRtl ? "rtl" : "ltr"}>
-        <p className="text-[11px] text-brand-accent tracking-widest font-medium mb-1.5">
-          {t.label}
-        </p>
-        <h1 className="text-[24px] font-bold text-brand-textPrimary leading-tight mb-2">
-          {t.h1}
-        </h1>
-        <p className="text-[14px] text-brand-textMuted leading-relaxed mb-4">
-          {t.sub}
-        </p>
-      </div>
-
-      {/* Stat strip */}
-      <div className="bg-[#0D1A2E] border border-[#1A2D47] rounded-xl px-4 py-2 mb-5 text-[12px] text-[#4E6A8A] text-center"
-        style={{ borderTop: "1px solid #ffffff08" }}
-      >
-        <span className="text-[#00C853] font-semibold">{phoneCount} Phones</span>
-        {" · "}
-        <span className="text-[#00C853] font-semibold">3 Carriers</span>
-        <div className="text-[11px] mt-0.5">Jazz · Zong · Ufone 5G</div>
-      </div>
-
-      <div className="relative">
-        <svg
-          className="absolute left-3 top-1/2 -translate-y-1/2 text-brand-textMuted pointer-events-none"
-          width="18" height="18" viewBox="0 0 24 24" fill="none"
-          stroke="currentColor" strokeWidth="2" strokeLinecap="round"
-        >
-          <circle cx="11" cy="11" r="7" />
-          <line x1="21" y1="21" x2="16.65" y2="16.65" />
-        </svg>
-        <input
-          type="text"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          onFocus={() => {
-            setFocused(true);
-            setInputFocused(true);
-          }}
-          onBlur={() => {
-            setTimeout(() => setFocused(false), 150);
-            setInputFocused(false);
-          }}
-          placeholder={t.placeholder}
-          className="w-full h-12 bg-brand-surface border border-brand-border rounded-xl outline-none pl-10 pr-4 text-[14px] text-brand-textPrimary placeholder:text-brand-textMuted"
+        {/* Decorative signal bars */}
+        <div
+          aria-hidden
+          className="absolute"
           style={{
-            boxShadow: inputFocused
-              ? "0 0 0 2px rgba(0,200,83,0.15), inset 0 1px 3px rgba(0,0,0,0.4)"
-              : "inset 0 1px 3px rgba(0,0,0,0.4)",
-            borderColor: inputFocused ? "#00C853" : undefined,
-            transition: "box-shadow 0.15s ease, border-color 0.15s ease",
+            right: isRtl ? "auto" : -20,
+            left: isRtl ? -20 : "auto",
+            top: -20,
+            opacity: 0.18,
           }}
-        />
-        {focused && suggestions.length > 0 && (
-          <ul className="absolute left-0 right-0 top-full mt-1 bg-brand-surface border border-brand-border rounded-xl z-50 overflow-hidden">
-            {suggestions.map((s) => (
-              <li
-                key={s.name}
-                onMouseDown={() => handlePick(s.name)}
-                className="h-11 px-4 flex items-center text-[13px] text-[#C8DCF0] hover:bg-brand-hover cursor-pointer border-b border-brand-border last:border-0"
-              >
-                {s.name}
-              </li>
-            ))}
-          </ul>
-        )}
+        >
+          <svg width="160" height="160" viewBox="0 0 160 160" fill="none">
+            <path
+              d="M30 110 Q80 50 130 110"
+              stroke="white"
+              strokeWidth="2"
+              fill="none"
+              strokeLinecap="round"
+            />
+            <path
+              d="M40 100 Q80 65 120 100"
+              stroke="white"
+              strokeWidth="2"
+              fill="none"
+              strokeLinecap="round"
+            />
+            <path
+              d="M55 90 Q80 75 105 90"
+              stroke="white"
+              strokeWidth="2"
+              fill="none"
+              strokeLinecap="round"
+            />
+            <circle cx="80" cy="95" r="4" fill="white" />
+          </svg>
+        </div>
+
+        <div className="relative">
+          <span
+            className="inline-flex items-center gap-1.5 text-[10px] font-semibold tracking-widest text-white/85 px-2.5 py-1 rounded-full"
+            style={{ background: "rgba(255,255,255,0.14)" }}
+          >
+            <span className="block w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+            {t.label}
+          </span>
+          <h1 className="text-[26px] leading-[1.15] font-bold text-white mt-3 tracking-tight">
+            {t.h1}
+          </h1>
+          <p className="text-[13px] text-white/85 mt-1.5 leading-relaxed">
+            {t.sub}
+          </p>
+
+          <div className="mt-4 flex items-center gap-3 text-[11px] text-white/90">
+            <div className="flex items-center gap-1.5">
+              <span className="text-white font-bold text-[14px]">
+                {phoneCount}
+              </span>
+              <span className="text-white/75">Phones</span>
+            </div>
+            <span className="text-white/30">•</span>
+            <div className="flex items-center gap-1.5">
+              <span className="text-white font-bold text-[14px]">3</span>
+              <span className="text-white/75">Carriers</span>
+            </div>
+            <span className="text-white/30">•</span>
+            <span className="text-white/75">Jazz · Zong · Ufone</span>
+          </div>
+        </div>
       </div>
 
-      <button
-        onClick={() => onSearch(query)}
-        onMouseEnter={() => setBtnHover(true)}
-        onMouseLeave={() => setBtnHover(false)}
-        className="w-full h-12 mt-2.5 text-brand-bg font-bold text-[14px] tracking-wide rounded-xl border-0 cursor-pointer active:scale-[0.97]"
-        style={{
-          background: "#00C853",
-          boxShadow: btnHover
-            ? "inset 0 1px 0 rgba(255,255,255,0.15), 0 6px 20px rgba(0,200,83,0.4)"
-            : "inset 0 1px 0 rgba(255,255,255,0.15), 0 4px 15px rgba(0,200,83,0.3)",
-          transform: btnHover ? "translateY(-1px)" : "translateY(0)",
-          transition: "all 0.2s ease",
-        }}
+      {/* Search card — floats below hero */}
+      <div
+        className="bg-brand-surface rounded-[18px] p-3 mt-3 tile-shadow"
+        style={{ border: "1px solid var(--color-brand-border)" }}
       >
-        {t.cta}
-      </button>
+        <div className="relative">
+          <svg
+            className="absolute left-3.5 top-1/2 -translate-y-1/2 text-brand-textMuted pointer-events-none"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+          >
+            <circle cx="11" cy="11" r="7" />
+            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+          </svg>
+          <input
+            type="text"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            onFocus={() => {
+              setFocused(true);
+              setInputFocused(true);
+            }}
+            onBlur={() => {
+              setTimeout(() => setFocused(false), 150);
+              setInputFocused(false);
+            }}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") onSearch(query);
+            }}
+            placeholder={t.placeholder}
+            className="w-full h-12 rounded-xl outline-none pl-11 pr-4 text-[14px] text-brand-textPrimary placeholder:text-brand-textMuted bg-[#F7F9FB]"
+            style={{
+              border: inputFocused
+                ? "1.5px solid var(--color-brand-accent)"
+                : "1.5px solid transparent",
+              boxShadow: inputFocused
+                ? "0 0 0 4px rgba(0,135,90,0.10)"
+                : "none",
+              transition: "all 0.15s ease",
+            }}
+          />
+          {focused && suggestions.length > 0 && (
+            <ul
+              className="absolute left-0 right-0 top-full mt-1.5 bg-brand-surface rounded-xl z-50 overflow-hidden tile-shadow"
+              style={{ border: "1px solid var(--color-brand-border)" }}
+            >
+              {suggestions.map((s) => (
+                <li
+                  key={s.name}
+                  onMouseDown={() => handlePick(s.name)}
+                  className="h-11 px-4 flex items-center text-[13px] text-brand-textPrimary hover:bg-brand-hover cursor-pointer border-b border-brand-border last:border-0"
+                >
+                  {s.name}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+
+        <button
+          onClick={() => onSearch(query)}
+          onMouseEnter={() => setBtnHover(true)}
+          onMouseLeave={() => setBtnHover(false)}
+          className="w-full h-12 mt-2.5 text-white font-bold text-[14px] tracking-wide rounded-xl border-0 cursor-pointer active:scale-[0.98]"
+          style={{
+            background:
+              "linear-gradient(135deg, #00A06C 0%, #00875A 60%, #006644 100%)",
+            boxShadow: btnHover
+              ? "inset 0 1px 0 rgba(255,255,255,0.20), 0 8px 22px -6px rgba(0,135,90,0.55)"
+              : "inset 0 1px 0 rgba(255,255,255,0.20), 0 4px 14px -4px rgba(0,135,90,0.40)",
+            transform: btnHover ? "translateY(-1px)" : "translateY(0)",
+            transition: "all 0.2s ease",
+          }}
+        >
+          {t.cta}
+        </button>
+      </div>
     </section>
   );
 }

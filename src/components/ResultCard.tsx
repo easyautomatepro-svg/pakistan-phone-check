@@ -43,64 +43,61 @@ export default function ResultCard({ lang, phone }: Props) {
 
   const overallPill =
     overall === "ready"
-      ? { text: t.ready, cls: "bg-status-yesBg text-status-yes border border-status-yes/30" }
+      ? { text: t.ready, cls: "bg-status-yesBg text-status-yes" }
       : overall === "no"
-        ? { text: t.no5g, cls: "bg-status-noBg text-status-no border border-status-no/30" }
-        : { text: t.partial, cls: "bg-status-partialBg text-status-partial border border-status-partial/30" };
+        ? { text: t.no5g, cls: "bg-status-noBg text-status-no" }
+        : { text: t.partial, cls: "bg-status-partialBg text-status-partial" };
 
   const statusPill = (s: Status) => {
     if (s === "YES")
-      return {
-        text: t.supported,
-        cls: "text-status-yes bg-status-yesBg",
-        glow: "0 0 8px rgba(0,200,83,0.25)",
-      };
+      return { text: t.supported, cls: "text-status-yes bg-status-yesBg" };
     if (s === "PARTIAL")
       return {
         text: t.partialPill,
         cls: "text-status-partial bg-status-partialBg",
-        glow: "0 0 8px rgba(255,183,0,0.25)",
       };
-    return {
-      text: t.notSupported,
-      cls: "text-status-no bg-status-noBg",
-      glow: "0 0 8px rgba(255,68,68,0.25)",
-    };
+    return { text: t.notSupported, cls: "text-status-no bg-status-noBg" };
   };
 
   return (
     <div
-      className={`mx-4 mb-4 bg-brand-surface rounded-[14px] border border-brand-border overflow-hidden relative z-10`}
+      className="mx-4 mb-4 bg-brand-surface rounded-2xl overflow-hidden relative z-10 tile-shadow"
       style={{
-        borderTop: "1px solid #ffffff08",
+        border: "1px solid var(--color-brand-border)",
         opacity: shown ? 1 : 0,
         transform: shown ? "translateY(0)" : "translateY(12px)",
         transition: "opacity 300ms ease, transform 300ms ease",
       }}
     >
-      <div className="px-4 py-3 border-b border-brand-border flex justify-between items-center">
-        <div className="flex items-center gap-2">
-          <span className="block w-[2px] h-3 bg-brand-accent rounded-sm" />
-          <div>
-            <p className="text-[10px] text-brand-textMuted tracking-widest">{t.resultFor}</p>
-            <p className="text-[14px] font-semibold text-brand-textPrimary">{phone.name}</p>
-          </div>
+      <div
+        className="px-4 py-3.5 flex justify-between items-center"
+        style={{ borderBottom: "1px solid var(--color-brand-border)" }}
+      >
+        <div>
+          <p className="text-[10px] text-brand-textMuted tracking-[0.2em] font-semibold">
+            {t.resultFor}
+          </p>
+          <p className="text-[15px] font-bold text-brand-textPrimary mt-0.5">
+            {phone.name}
+          </p>
         </div>
-        <span className={`text-[11px] font-semibold rounded-full px-3 py-1 ${overallPill.cls}`}>
+        <span
+          className={`text-[11px] font-bold rounded-full px-3 py-1.5 ${overallPill.cls}`}
+        >
           {overallPill.text}
         </span>
       </div>
 
       <table className="w-full border-collapse">
         <thead>
-          <tr className="bg-[#0A1628]">
-            <th className="text-[11px] text-brand-textMuted tracking-widest font-medium px-4 py-2 text-left">
+          <tr style={{ background: "#FAFBFC" }}>
+            <th className="text-[10px] text-brand-textMuted tracking-[0.15em] font-semibold px-4 py-2.5 text-left">
               {t.carrier}
             </th>
-            <th className="text-[11px] text-brand-textMuted tracking-widest font-medium px-4 py-2 text-center">
+            <th className="text-[10px] text-brand-textMuted tracking-[0.15em] font-semibold px-4 py-2.5 text-center">
               {t.status}
             </th>
-            <th className="text-[11px] text-brand-textMuted tracking-widest font-medium px-4 py-2 text-right">
+            <th className="text-[10px] text-brand-textMuted tracking-[0.15em] font-semibold px-4 py-2.5 text-right">
               {t.bands}
             </th>
           </tr>
@@ -113,23 +110,25 @@ export default function ResultCard({ lang, phone }: Props) {
             return (
               <tr
                 key={c.key}
-                className="border-t border-brand-border carrier-row"
+                className="carrier-row"
+                style={{ borderTop: "1px solid var(--color-brand-border)" }}
               >
                 <td className="px-4 py-3">
                   <div className="flex items-center">
                     <CarrierAvatar carrier={c.key} size={28} />
-                    <span className="ml-2 text-[13px] font-medium text-[#C8DCF0]">{c.label}</span>
+                    <span className="ml-2.5 text-[13px] font-semibold text-brand-textPrimary">
+                      {c.label}
+                    </span>
                   </div>
                 </td>
                 <td className="text-center py-3">
                   <span
-                    className={`inline-flex items-center gap-1 text-[12px] font-semibold rounded-full px-2.5 py-0.5 ${pill.cls}`}
-                    style={{ boxShadow: pill.glow }}
+                    className={`inline-flex items-center gap-1 text-[11px] font-bold rounded-full px-2.5 py-1 ${pill.cls}`}
                   >
                     {pill.text}
                   </span>
                 </td>
-                <td className="px-4 py-3 text-right text-[11px] text-brand-textMuted">
+                <td className="px-4 py-3 text-right text-[11px] text-brand-textMuted font-medium">
                   {bands}
                 </td>
               </tr>
@@ -138,7 +137,13 @@ export default function ResultCard({ lang, phone }: Props) {
         </tbody>
       </table>
 
-      <div className="px-4 py-2.5 border-t border-brand-border text-[11px] text-brand-textMuted">
+      <div
+        className="px-4 py-2.5 text-[10px] text-brand-textMuted"
+        style={{
+          borderTop: "1px solid var(--color-brand-border)",
+          background: "#FAFBFC",
+        }}
+      >
         {t.confidence(phone.confidence, phone.variant)}
       </div>
     </div>

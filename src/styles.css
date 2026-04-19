@@ -21,22 +21,24 @@
 @theme inline {
   --font-sans: "Sora", ui-sans-serif, system-ui, sans-serif;
 
-  --color-brand-bg: #08111F;
-  --color-brand-surface: #0D1A2E;
-  --color-brand-hover: #111E35;
-  --color-brand-accent: #00C853;
-  --color-brand-accentHover: #00E05A;
-  --color-brand-border: #1A2D47;
-  --color-brand-textPrimary: #E8F4FF;
-  --color-brand-textSecondary: #7DA8D4;
-  --color-brand-textMuted: #4E6A8A;
+  --color-brand-bg: #F4F6F8;
+  --color-brand-surface: #FFFFFF;
+  --color-brand-hover: #F0FAF4;
+  --color-brand-accent: #00875A;
+  --color-brand-accentHover: #00A06C;
+  --color-brand-accentDark: #006644;
+  --color-brand-border: #E5E9EE;
+  --color-brand-textPrimary: #0F1B2D;
+  --color-brand-textSecondary: #4A5B70;
+  --color-brand-textMuted: #8A98A8;
+  --color-brand-onAccent: #FFFFFF;
 
-  --color-status-yes: #00C853;
-  --color-status-yesBg: #001A08;
-  --color-status-partial: #FFB700;
-  --color-status-partialBg: #1A1000;
-  --color-status-no: #FF4444;
-  --color-status-noBg: #1A0005;
+  --color-status-yes: #00875A;
+  --color-status-yesBg: #E6F5EE;
+  --color-status-partial: #B8740A;
+  --color-status-partialBg: #FFF6E5;
+  --color-status-no: #C8202F;
+  --color-status-noBg: #FCEAEC;
 
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -164,17 +166,35 @@
     background-color: var(--color-brand-bg);
     color: var(--color-brand-textPrimary);
     font-family: "Sora", ui-sans-serif, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
   }
 }
 
 @keyframes pulse-glow {
-  0%, 100% { opacity: 0.4; transform: scale(1); }
-  50% { opacity: 0.7; transform: scale(1.05); }
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 0.9; transform: scale(1.08); }
+}
+
+@keyframes float-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .carrier-row {
   transition: background-color 0.15s ease;
 }
 .carrier-row:hover {
-  background-color: rgba(0, 200, 83, 0.03);
+  background-color: rgba(0, 135, 90, 0.04);
+}
+
+.tile-shadow {
+  box-shadow: 0 1px 2px rgba(15, 27, 45, 0.04), 0 4px 12px rgba(15, 27, 45, 0.04);
+}
+.tile-shadow:hover {
+  box-shadow: 0 2px 4px rgba(15, 27, 45, 0.06), 0 8px 20px rgba(15, 27, 45, 0.08);
+}
+
+.hero-card {
+  background: linear-gradient(135deg, #00875A 0%, #006644 100%);
+  box-shadow: 0 10px 30px -8px rgba(0, 135, 90, 0.45), 0 4px 12px rgba(0, 102, 68, 0.25);
 }
