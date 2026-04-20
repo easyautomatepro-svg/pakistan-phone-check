@@ -9,38 +9,105 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SpeedtestRouteImport } from './routes/speedtest'
+import { Route as PackagesRouteImport } from './routes/packages'
+import { Route as CoverageRouteImport } from './routes/coverage'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ResultSlugRouteImport } from './routes/result.$slug'
 
+const SpeedtestRoute = SpeedtestRouteImport.update({
+  id: '/speedtest',
+  path: '/speedtest',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PackagesRoute = PackagesRouteImport.update({
+  id: '/packages',
+  path: '/packages',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CoverageRoute = CoverageRouteImport.update({
+  id: '/coverage',
+  path: '/coverage',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ResultSlugRoute = ResultSlugRouteImport.update({
+  id: '/result/$slug',
+  path: '/result/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/coverage': typeof CoverageRoute
+  '/packages': typeof PackagesRoute
+  '/speedtest': typeof SpeedtestRoute
+  '/result/$slug': typeof ResultSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/coverage': typeof CoverageRoute
+  '/packages': typeof PackagesRoute
+  '/speedtest': typeof SpeedtestRoute
+  '/result/$slug': typeof ResultSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/coverage': typeof CoverageRoute
+  '/packages': typeof PackagesRoute
+  '/speedtest': typeof SpeedtestRoute
+  '/result/$slug': typeof ResultSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/coverage' | '/packages' | '/speedtest' | '/result/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/coverage' | '/packages' | '/speedtest' | '/result/$slug'
+  id:
+    | '__root__'
+    | '/'
+    | '/coverage'
+    | '/packages'
+    | '/speedtest'
+    | '/result/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CoverageRoute: typeof CoverageRoute
+  PackagesRoute: typeof PackagesRoute
+  SpeedtestRoute: typeof SpeedtestRoute
+  ResultSlugRoute: typeof ResultSlugRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/speedtest': {
+      id: '/speedtest'
+      path: '/speedtest'
+      fullPath: '/speedtest'
+      preLoaderRoute: typeof SpeedtestRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/packages': {
+      id: '/packages'
+      path: '/packages'
+      fullPath: '/packages'
+      preLoaderRoute: typeof PackagesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/coverage': {
+      id: '/coverage'
+      path: '/coverage'
+      fullPath: '/coverage'
+      preLoaderRoute: typeof CoverageRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,12 +115,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/result/$slug': {
+      id: '/result/$slug'
+      path: '/result/$slug'
+      fullPath: '/result/$slug'
+      preLoaderRoute: typeof ResultSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CoverageRoute: CoverageRoute,
+  PackagesRoute: PackagesRoute,
+  SpeedtestRoute: SpeedtestRoute,
+  ResultSlugRoute: ResultSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}
