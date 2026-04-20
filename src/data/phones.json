@@ -1,6 +1,7 @@
 [
   {
     "name": "Samsung Galaxy S25 Ultra",
+    "slug": "samsung-galaxy-s25-ultra",
     "brand": "Samsung",
     "variant": "SM-S938B",
     "confidence": "HIGH",
@@ -12,7 +13,34 @@
     "ufoneBands": "n41"
   },
   {
+    "name": "Samsung Galaxy S25",
+    "slug": "samsung-galaxy-s25",
+    "brand": "Samsung",
+    "variant": "SM-S931B",
+    "confidence": "HIGH",
+    "jazz": "YES",
+    "zong": "YES",
+    "ufone": "YES",
+    "jazzBands": "n28, n41",
+    "zongBands": "n28, n78",
+    "ufoneBands": "n41"
+  },
+  {
+    "name": "iPhone 16 Pro Max",
+    "slug": "iphone-16-pro-max",
+    "brand": "Apple",
+    "variant": "A3295",
+    "confidence": "HIGH",
+    "jazz": "YES",
+    "zong": "YES",
+    "ufone": "YES",
+    "jazzBands": "n28, n38",
+    "zongBands": "n28, n78",
+    "ufoneBands": "n38"
+  },
+  {
     "name": "iPhone 16 Pro",
+    "slug": "iphone-16-pro",
     "brand": "Apple",
     "variant": "A3293",
     "confidence": "HIGH",
@@ -25,6 +53,7 @@
   },
   {
     "name": "Realme 13 Pro+",
+    "slug": "realme-13-pro-plus",
     "brand": "Realme",
     "variant": "Global",
     "confidence": "MEDIUM",
@@ -37,6 +66,7 @@
   },
   {
     "name": "Xiaomi Redmi Note 14",
+    "slug": "xiaomi-redmi-note-14",
     "brand": "Xiaomi",
     "variant": "Global",
     "confidence": "MEDIUM",
@@ -49,6 +79,7 @@
   },
   {
     "name": "OnePlus 13",
+    "slug": "oneplus-13",
     "brand": "OnePlus",
     "variant": "PJX110",
     "confidence": "HIGH",
@@ -57,6 +88,19 @@
     "ufone": "YES",
     "jazzBands": "n28, n41",
     "zongBands": "n28, n78",
+    "ufoneBands": "n41"
+  },
+  {
+    "name": "Vivo V40 Pro",
+    "slug": "vivo-v40-pro",
+    "brand": "Vivo",
+    "variant": "V2318",
+    "confidence": "MEDIUM",
+    "jazz": "YES",
+    "zong": "PARTIAL",
+    "ufone": "YES",
+    "jazzBands": "n28, n41",
+    "zongBands": "n28",
     "ufoneBands": "n41"
   }
 ]
