@@ -1,8 +1,6 @@
 // GOOGLE AI STUDIO — GEMINI API
-// Connect this function after GitHub export
+// Wire after GitHub export
 // Model: gemini-2.0-flash
-// Purpose: Natural language phone queries +
-//          smart band compatibility reasoning
 
 export interface AICompatibilityResult {
   name: string;
@@ -10,17 +8,13 @@ export interface AICompatibilityResult {
   zong: "YES" | "PARTIAL" | "NO";
   ufone: "YES" | "PARTIAL" | "NO";
   bands: string;
-  confidence: "HIGH" | "MEDIUM" | "LOW";
 }
 
 export async function checkCompatibilityAI(
-  phoneQuery: string,
+  query: string,
 ): Promise<AICompatibilityResult | null> {
-  // TODO: Replace with live Gemini API call
-  // API endpoint: https://generativelanguage.googleapis.com
-  // Input: user's phone query string
-  // Output: { name, jazz, zong, ufone, bands, confidence }
-
-  console.log("AI check for:", phoneQuery);
-  return null; // falls back to phones.json search
+  // TODO: Gemini API call goes here
+  // Returns: { name, jazz, zong, ufone, bands }
+  console.log("AI check:", query);
+  return null; // falls back to phones.json
 }
