@@ -83,48 +83,21 @@ function HomePage() {
     }
   }
 
-  const stats = [
-    { value: '272', label: isUrdu ? 'فونز' : 'Phones' },
-    { value: '3',   label: isUrdu ? 'کیریئرز' : 'Carriers' },
-    { value: 'Jazz · Zong · Ufone', label: '' },
-  ]
-
-  const explainerCards = [
+  const carrierBands = [
     {
-      icon: (
-        <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-          <rect x="7" y="2" width="8" height="18" rx="2" stroke="currentColor" strokeWidth="1.5"/>
-          <path d="M3 7h2M3 11h2M3 15h2M17 7h2M17 11h2M17 15h2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-        </svg>
-      ),
-      title: isUrdu ? 'ایک ہی فون، مختلف نتائج' : 'Same phone, different results',
-      body: isUrdu
-        ? 'UAE میں بکنے والے فون میں وہ فریکوئنسی نہیں ہوتی جو Jazz استعمال کرتا ہے۔ ایک ہی ماڈل نیم، اندر مختلف بینڈز۔'
-        : 'A phone sold in UAE may miss the exact frequency Jazz uses. Same model name — different bands inside.',
+      key: 'jazz' as const,
+      name: 'Jazz 5G',
+      bands: 'n28 (700MHz) + n7/n38/n41 (2600MHz)',
     },
     {
-      icon: (
-        <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-          <path d="M11 2v4M11 16v4M4.22 4.22l2.83 2.83M14.95 14.95l2.83 2.83M2 11h4M16 11h4M4.22 17.78l2.83-2.83M14.95 7.05l2.83-2.83" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-          <circle cx="11" cy="11" r="3" stroke="currentColor" strokeWidth="1.5"/>
-        </svg>
-      ),
-      title: isUrdu ? 'ہر کیریئر مختلف بینڈ استعمال کرتا ہے' : 'Each carrier uses different bands',
-      body: isUrdu
-        ? 'Jazz کو n28 چاہیے۔ Zong کو n78 چاہیے۔ Ufone کو n41 چاہیے۔ آپ کے فون کو میچ کرنا ضروری ہے — ہم تینوں چیک کرتے ہیں۔'
-        : 'Jazz needs n28. Zong needs n78. Ufone needs n41. Your phone must match. We check all three for you.',
+      key: 'zong' as const,
+      name: 'Zong 5G',
+      bands: 'n28 (700MHz) + n40/n78 (2300/3500MHz)',
     },
     {
-      icon: (
-        <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-          <path d="M9 12l2 2 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-          <path d="M12 3a9 9 0 100 18A9 9 0 0012 3z" stroke="currentColor" strokeWidth="1.5"/>
-        </svg>
-      ),
-      title: isUrdu ? 'ہم 272 فونز چیک کرتے ہیں' : 'We check 272 phones',
-      body: isUrdu
-        ? 'ہمارا ڈیٹابیس پاکستان میں بکنے والے ہر بڑے برانڈ کو کور کرتا ہے — Samsung، Apple، Xiaomi، Vivo، Oppo، Realme اور مزید۔'
-        : 'Our database covers every major brand sold in Pakistan — Samsung, Apple, Xiaomi, Vivo, Oppo, Realme and more.',
+      key: 'ufone' as const,
+      name: 'Ufone 5G',
+      bands: 'n7/n38/n41 (2600MHz)',
     },
   ]
 
