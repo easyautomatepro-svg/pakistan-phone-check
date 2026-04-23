@@ -5,37 +5,52 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-sans: "Sora", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Bricolage Grotesque", "Inter", ui-sans-serif, system-ui, sans-serif;
 
-  /* Brand — premium green, inspired by Nayapay + Jazz World */
-  --color-brand-primary: #00A651;
-  --color-brand-primaryDark: #007A3D;
-  --color-brand-primaryLight: #E8F5EE;
-  --color-brand-primaryGlow: #00A65115;
-  --color-brand-accent: #00C853;
+  /* Surfaces */
+  --color-bg:           #FAFAF9;
+  --color-surface:      #FFFFFF;
+  --color-surface-alt:  #F4F4F2;
+  --color-border:       #E5E5E3;
+  --color-border-strong:#D0D0CC;
 
-  --color-brand-bg: #F5F7F5;
-  --color-brand-surface: #FFFFFF;
-  --color-brand-surfaceAlt: #F0F4F1;
-  --color-brand-border: #E2EBE5;
-  --color-brand-borderDark: #C8D9CE;
+  /* Text */
+  --color-text:         #141413;
+  --color-text-secondary:#6B6B68;
+  --color-text-muted:   #A3A3A0;
 
-  --color-brand-textPrimary: #0D1F15;
-  --color-brand-textSecondary: #4A6355;
-  --color-brand-textMuted: #8FA99A;
+  /* Accent green */
+  --color-accent:       #00A651;
+  --color-accent-dark:  #007A3D;
+  --color-accent-light: #F0FAF4;
+  --color-accent-border:#B8E6CC;
 
-  /* Status */
-  --color-status-yes: #00A651;
-  --color-status-yesBg: #E8F5EE;
-  --color-status-yesBorder: #A8D5BC;
-  --color-status-partial: #D97706;
-  --color-status-partialBg: #FEF3C7;
-  --color-status-partialBorder: #FCD34D;
-  --color-status-no: #DC2626;
-  --color-status-noBg: #FEE2E2;
-  --color-status-noBorder: #FCA5A5;
+  /* Status YES */
+  --color-yes:          #16A34A;
+  --color-yes-bg:       #F0FDF4;
+  --color-yes-border:   #BBF7D0;
+  /* Status PARTIAL */
+  --color-partial:      #D97706;
+  --color-partial-bg:   #FFFBEB;
+  --color-partial-border:#FDE68A;
+  /* Status NO */
+  --color-no:           #DC2626;
+  --color-no-bg:        #FEF2F2;
+  --color-no-border:    #FECACA;
 
-  /* shadcn fallbacks (kept so UI lib doesn't break) */
+  /* Carriers */
+  --color-jazz:         #C0392B;
+  --color-jazz-bg:      #FFF5F5;
+  --color-jazz-border:  #FED7D7;
+  --color-zong:         #1A56CC;
+  --color-zong-bg:      #EFF6FF;
+  --color-zong-border:  #BFDBFE;
+  --color-ufone:        #7C3AED;
+  --color-ufone-bg:     #F5F3FF;
+  --color-ufone-border: #DDD6FE;
+
+  /* shadcn fallbacks */
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -52,11 +67,10 @@
   --color-secondary-foreground: var(--secondary-foreground);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
+  --color-accent-shadcn: var(--accent-shadcn);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
-  --color-border: var(--border);
+  --color-border-shadcn: var(--border-shadcn);
   --color-input: var(--input);
   --color-ring: var(--ring);
 }
@@ -64,54 +78,58 @@
 :root {
   --radius: 0.75rem;
   --background: oklch(1 0 0);
-  --foreground: oklch(0.18 0.03 150);
+  --foreground: oklch(0.18 0.01 80);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.18 0.03 150);
+  --card-foreground: oklch(0.18 0.01 80);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.18 0.03 150);
+  --popover-foreground: oklch(0.18 0.01 80);
   --primary: oklch(0.62 0.16 152);
   --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.96 0.01 152);
-  --secondary-foreground: oklch(0.25 0.04 152);
-  --muted: oklch(0.96 0.01 152);
-  --muted-foreground: oklch(0.5 0.03 152);
-  --accent: oklch(0.95 0.02 152);
-  --accent-foreground: oklch(0.25 0.04 152);
+  --secondary: oklch(0.96 0.005 80);
+  --secondary-foreground: oklch(0.25 0.01 80);
+  --muted: oklch(0.96 0.005 80);
+  --muted-foreground: oklch(0.5 0.01 80);
+  --accent-shadcn: oklch(0.95 0.01 152);
+  --accent-foreground: oklch(0.25 0.01 80);
   --destructive: oklch(0.6 0.2 25);
   --destructive-foreground: oklch(1 0 0);
-  --border: oklch(0.92 0.01 152);
-  --input: oklch(0.92 0.01 152);
+  --border-shadcn: oklch(0.92 0.005 80);
+  --input: oklch(0.92 0.005 80);
   --ring: oklch(0.62 0.16 152);
 }
 
 @layer base {
-  * { border-color: var(--color-brand-border); }
   html { scroll-behavior: smooth; }
   body {
-    background-color: var(--color-brand-bg);
-    color: var(--color-brand-textPrimary);
-    font-family: "Sora", ui-sans-serif, system-ui, sans-serif;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: "cv11", "ss01";
+  }
+  h1, h2, h3, h4, h5, h6, .font-display {
+    font-family: "Bricolage Grotesque", "Inter", ui-sans-serif, system-ui, sans-serif;
   }
   button { cursor: pointer; }
+  input, textarea, select { font-family: inherit; }
 }
 
+/* Animations */
 @keyframes float-up {
   from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 .animate-float-up { animation: float-up 250ms ease both; }
 
-@keyframes pulse-dot {
-  0%, 100% { opacity: 0.6; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.15); }
+@keyframes slide-down {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
-.animate-pulse-dot { animation: pulse-dot 1.6s ease-in-out infinite; }
-
-.hero-gradient {
-  background: linear-gradient(135deg, #00A651 0%, #007A3D 100%);
-}
+.animate-slide-down { animation: slide-down 150ms ease both; }
 
 .btn-press { transition: all 150ms ease; }
 .btn-press:active { transform: scale(0.97); }
+
+.tile-hover { transition: all 150ms ease; }
+.tile-hover:hover { transform: translateY(-1px); }
