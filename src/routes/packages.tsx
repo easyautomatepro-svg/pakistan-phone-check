@@ -4,6 +4,18 @@ import CarrierIcon, { type CarrierKey } from "@/components/CarrierIcon";
 import { useLanguage } from "@/context/LanguageContext";
 import { strings } from "@/i18n/strings";
 
+export const Route = createFileRoute("/packages")({
+  head: () => ({
+    meta: [
+      { title: "5G Packages — Jazz, Zong & Ufone | 5GCheck.pk" },
+      { name: "description", content: "Compare weekly and monthly 5G data plans from Jazz, Zong and Ufone in Pakistan." },
+      { property: "og:title", content: "5G Packages — Jazz, Zong & Ufone" },
+      { property: "og:description", content: "Compare weekly and monthly 5G data plans across Pakistan's three carriers." },
+    ],
+  }),
+  component: PackagesPage,
+});
+
 interface Plan {
   name: string;
   price: number;
@@ -11,83 +23,119 @@ interface Plan {
   validity: string;
 }
 
-const data: { key: CarrierKey; label: string; plans: Plan[] }[] = [
+const data: { key: CarrierKey; name: string; link: string; plans: Plan[] }[] = [
   {
     key: "jazz",
-    label: "Jazz",
+    name: "Jazz",
+    link: "https://jazz.com.pk/",
     plans: [
-      { name: "Jazz Weekly 5G", price: 200, data: "10GB", validity: "7 days" },
-      { name: "Jazz Monthly 5G", price: 600, data: "30GB", validity: "30 days" },
+      { name: "Weekly 5G", data: "10GB", validity: "7 days", price: 200 },
+      { name: "Monthly 5G", data: "30GB", validity: "30 days", price: 600 },
     ],
   },
   {
     key: "zong",
-    label: "Zong",
+    name: "Zong",
+    link: "https://www.zong.com.pk/",
     plans: [
-      { name: "Zong Weekly 5G", price: 180, data: "8GB", validity: "7 days" },
-      { name: "Zong Monthly 5G", price: 550, data: "25GB", validity: "30 days" },
+      { name: "Weekly 5G", data: "8GB", validity: "7 days", price: 180 },
+      { name: "Monthly 5G", data: "25GB", validity: "30 days", price: 550 },
     ],
   },
   {
     key: "ufone",
-    label: "Ufone",
+    name: "Ufone",
+    link: "https://ufone.com/",
     plans: [
-      { name: "Ufone Weekly 5G", price: 190, data: "9GB", validity: "7 days" },
-      { name: "Ufone Monthly 5G", price: 580, data: "28GB", validity: "30 days" },
+      { name: "Weekly 5G", data: "9GB", validity: "7 days", price: 190 },
+      { name: "Monthly 5G", data: "28GB", validity: "30 days", price: 580 },
     ],
   },
 ];
 
-export const Route = createFileRoute("/packages")({
-  component: PackagesPage,
-  head: () => ({
-    meta: [
-      { title: "5G Packages — Jazz, Zong & Ufone | 5GCheck.pk" },
-      { name: "description", content: "Compare weekly and monthly 5G packages from Jazz, Zong & Ufone in Pakistan." },
-      { property: "og:title", content: "5G Packages in Pakistan" },
-      { property: "og:description", content: "Compare 5G plans from Jazz, Zong & Ufone." },
-    ],
-  }),
-});
-
 function PackagesPage() {
-  const { lang, isRtl } = useLanguage();
+  const { lang } = useLanguage();
   const t = strings[lang];
 
   return (
     <AppLayout>
-      <div className="px-4" dir={isRtl ? "rtl" : "ltr"}>
-        <h1 className="text-[20px] font-bold text-brand-textPrimary pt-4 pb-4">{t.pkgPageTitle}</h1>
+      <section className="px-[18px] pt-7 pb-2">
+        <h1
+          style={{
+            fontFamily: "Bricolage Grotesque",
+            fontWeight: 800,
+            fontSize: 24,
+            letterSpacing: "-0.5px",
+            color: "#141413",
+          }}
+        >
+          {t.pkgPageTitle}
+        </h1>
+      </section>
 
-        <div className="flex flex-col gap-5">
-          {data.map((carrier) => (
-            <section key={carrier.key}>
-              <div className="flex items-center justify-between mb-3">
-                <div className="flex items-center gap-2.5">
-                  <CarrierIcon carrier={carrier.key} size={28} />
-                  <span className="text-[15px] font-semibold text-brand-textPrimary">{carrier.label}</span>
-                </div>
-                <button className="text-[12px] font-semibold text-brand-primary">{t.pkgViewAll}</button>
-              </div>
-              <div className="flex flex-col gap-3">
-                {carrier.plans.map((p) => (
-                  <div key={p.name} className="bg-white border border-brand-border rounded-2xl p-4 flex justify-between items-center">
-                    <div className="min-w-0">
-                      <p className="text-[14px] font-semibold text-brand-textPrimary truncate">{p.name}</p>
-                      <p className="text-[12px] text-brand-textMuted mt-0.5">{p.data} · {p.validity}</p>
-                    </div>
-                    <div className="text-end shrink-0 ms-3">
-                      <p className="text-[18px] font-bold text-brand-primary leading-none">Rs. {p.price}</p>
-                      <button className="text-[11px] font-semibold text-brand-primary mt-1.5 hover:underline">
-                        {t.pkgGet}
-                      </button>
-                    </div>
+      <div className="flex flex-col gap-6 mt-4">
+        {data.map((carrier) => (
+          <div key={carrier.key}>
+            <div className="flex items-center gap-3 px-[18px] mb-3">
+              <CarrierIcon carrier={carrier.key} size={28} />
+              <span
+                style={{
+                  fontFamily: "Bricolage Grotesque",
+                  fontWeight: 700,
+                  fontSize: 16,
+                  color: "#141413",
+                }}
+              >
+                {carrier.name}
+              </span>
+            </div>
+            <div className="flex flex-col gap-[10px] px-[18px]">
+              {carrier.plans.map((plan) => (
+                <div
+                  key={plan.name}
+                  className="bg-white flex items-center justify-between"
+                  style={{
+                    border: "1px solid #E5E5E3",
+                    borderRadius: 16,
+                    padding: 16,
+                  }}
+                >
+                  <div className="min-w-0">
+                    <p style={{ fontSize: 14, fontWeight: 600, color: "#141413" }}>{plan.name}</p>
+                    <p style={{ fontSize: 12, color: "#6B6B68", marginTop: 2 }}>
+                      {plan.data} · {plan.validity}
+                    </p>
                   </div>
-                ))}
-              </div>
-            </section>
-          ))}
-        </div>
+                  <div className="flex flex-col items-end gap-1">
+                    <span
+                      style={{
+                        fontFamily: "Bricolage Grotesque",
+                        fontWeight: 800,
+                        fontSize: 20,
+                        color: "#00A651",
+                        lineHeight: 1,
+                      }}
+                    >
+                      Rs. {plan.price}
+                    </span>
+                    <a
+                      href={carrier.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        fontSize: 11,
+                        fontWeight: 700,
+                        color: "#007A3D",
+                      }}
+                    >
+                      {t.pkgGet}
+                    </a>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
       </div>
     </AppLayout>
   );
