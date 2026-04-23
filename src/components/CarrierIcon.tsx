@@ -1,12 +1,12 @@
-import { useState } from "react";
-
 export type CarrierKey = "jazz" | "zong" | "ufone";
 
-const fallback: Record<CarrierKey, { letter: string; bg: string; fg: string }> = {
-  jazz: { letter: "J", bg: "#FEE2E2", fg: "#DC2626" },
-  zong: { letter: "Z", bg: "#DBEAFE", fg: "#2563EB" },
-  ufone: { letter: "U", bg: "#F3E8FF", fg: "#9333EA" },
+const config: Record<CarrierKey, { letter: string; bg: string; fg: string; border: string }> = {
+  jazz:  { letter: "J", bg: "#FFF5F5", fg: "#C0392B", border: "#FED7D7" },
+  zong:  { letter: "Z", bg: "#EFF6FF", fg: "#1A56CC", border: "#BFDBFE" },
+  ufone: { letter: "U", bg: "#F5F3FF", fg: "#7C3AED", border: "#DDD6FE" },
 };
+
+export const carrierConfig = config;
 
 interface Props {
   carrier: CarrierKey;
@@ -14,29 +14,9 @@ interface Props {
 }
 
 export default function CarrierIcon({ carrier, size = 32 }: Props) {
-  const [failed, setFailed] = useState(false);
-  const f = fallback[carrier];
-  const radius = Math.round(size * 0.28);
-
-  if (!failed) {
-    return (
-      <img
-        src={`/assets/${carrier}.png`}
-        alt={carrier}
-        width={size}
-        height={size}
-        loading="lazy"
-        onError={() => setFailed(true)}
-        style={{
-          width: size,
-          height: size,
-          borderRadius: radius,
-          objectFit: "contain",
-        }}
-      />
-    );
-  }
-
+  const c = config[carrier];
+  const radius = Math.round(size * 0.31);
+  const fontSize = Math.max(11, Math.round(size * 0.42));
   return (
     <div
       aria-label={carrier}
@@ -44,17 +24,20 @@ export default function CarrierIcon({ carrier, size = 32 }: Props) {
         width: size,
         height: size,
         borderRadius: radius,
-        background: f.bg,
-        color: f.fg,
+        background: c.bg,
+        color: c.fg,
+        border: `1px solid ${c.border}`,
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        fontWeight: 700,
-        fontSize: Math.max(12, Math.round(size * 0.46)),
+        fontFamily: "Bricolage Grotesque",
+        fontWeight: 800,
+        fontSize,
         lineHeight: 1,
+        flexShrink: 0,
       }}
     >
-      {f.letter}
+      {c.letter}
     </div>
   );
 }
